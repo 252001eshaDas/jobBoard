@@ -8,6 +8,7 @@ import { pinoHttp } from 'pino-http';
 import { env } from './config/env';
 import { logger } from './config/logger';
 import { errorHandler, notFound } from './middlewares/errorHandler';
+import { jobRouter } from './modules/jobs/job.routes';
 
 export const app = express();
 
@@ -26,7 +27,7 @@ app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 
 // Mount feature routers here as you build them:
 // app.use('/api/auth', authRouter);
-// app.use('/api/jobs', jobsRouter);
+app.use('/api/jobs', jobRouter);
 
 app.use(notFound);
 app.use(errorHandler);
